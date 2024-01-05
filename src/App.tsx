@@ -9,20 +9,19 @@ export default function App() {
   const [newTaskTitle, setNewTaskTitle] = useState('')
 
   useEffect(() => {
-    taskRepo
-      .find({
+    return taskRepo
+      .liveQuery({
         limit: 20,
         orderBy: { createdAt: 'asc' },
         // where: { completed: true },
       })
-      .then(setTasks)
+      .subscribe((info) => setTasks(info.applyChanges))
   }, [])
 
   async function addTask(e: FormEvent) {
     e.preventDefault()
     try {
-      const newTask = await taskRepo.insert({ title: newTaskTitle })
-      setTasks([...tasks, newTask])
+      await taskRepo.insert({ title: newTaskTitle })
       setNewTaskTitle('')
     } catch (error) {
       alert((error as { message: string }).message)
@@ -51,7 +50,7 @@ export default function App() {
           }
 
           async function setCompleted(completed: boolean) {
-            setTask(await taskRepo.save({ ...task, completed }))
+            await taskRepo.save({ ...task, completed })
           }
 
           function setTitle(title: string) {
@@ -60,7 +59,7 @@ export default function App() {
 
           async function saveTask() {
             try {
-              setTask(await taskRepo.save(task))
+              await taskRepo.save(task)
             } catch (error) {
               alert((error as { message: string }).message)
             }
@@ -69,7 +68,6 @@ export default function App() {
           async function deleteTask() {
             try {
               await taskRepo.delete(task)
-              setTasks(tasks.filter((t) => t !== task))
             } catch (error) {
               alert((error as { message: string }).message)
             }
