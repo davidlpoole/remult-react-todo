@@ -66,6 +66,15 @@ export default function App() {
             }
           }
 
+          async function deleteTask() {
+            try {
+              await taskRepo.delete(task)
+              setTasks(tasks.filter((t) => t !== task))
+            } catch (error) {
+              alert((error as { message: string }).message)
+            }
+          }
+
           return (
             <div className="flex items-center" key={task.id}>
               <input
@@ -80,10 +89,16 @@ export default function App() {
                 onChange={(e) => setTitle(e.target.value)}
               />
               <button
-                className="rounded-lg bg-gray-100 border border-gray-500 py-2 px-4 hover:border-blue-500 transition-all duration-300"
+                className="mr-5 rounded-lg bg-gray-100 border border-gray-500 py-2 px-4 hover:border-blue-500 transition-all duration-300"
                 onClick={saveTask}
               >
                 Save
+              </button>
+              <button
+                className="rounded-lg bg-gray-100 border border-gray-500 py-2 px-4 hover:border-blue-500 transition-all duration-300"
+                onClick={deleteTask}
+              >
+                Delete
               </button>
             </div>
           )

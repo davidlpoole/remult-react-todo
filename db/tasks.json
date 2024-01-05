@@ -6,12 +6,6 @@
     "createdAt": "2024-01-04T23:38:35.618Z"
   },
   {
-    "id": "szihz7c8rm2ihl2z4xe45xzj",
-    "title": "Read a book",
-    "completed": false,
-    "createdAt": "2024-01-04T23:39:10.499Z"
-  },
-  {
     "id": "u9sop1j10jinl09qrb4bww8i",
     "title": "Take a nap",
     "completed": true,
@@ -21,12 +15,6 @@
     "id": "q74x4edpr0fbbr3wrbvy0cr7",
     "title": "Pay bills",
     "completed": true,
-    "createdAt": "2024-01-04T23:39:10.502Z"
-  },
-  {
-    "id": "wag2wdd8h2cimteqoymqr957",
-    "title": "Do laundry",
-    "completed": false,
     "createdAt": "2024-01-04T23:39:10.502Z"
   }
 ]
