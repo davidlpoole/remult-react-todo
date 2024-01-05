@@ -31,17 +31,17 @@ export default function App() {
 
   return (
     <div>
-      <h1 className="text-4xl my-5">Todos</h1>
+      <h1 className="text-4xl my-5 text-center">Todos</h1>
       <main>
-        <form className="mb-5" onSubmit={addTask}>
+        <form className="flex justify-between mb-5" onSubmit={addTask}>
           <input
-            className="rounded-lg border py-2 px-4 mr-5 hover:border-blue-500"
+            className="rounded-lg w-full border border-gray-500 py-2 px-4 mr-5 hover:border-blue-500 transition-all duration-300"
             type="text"
             value={newTaskTitle}
             placeholder="What needs to be done?"
             onChange={(e) => setNewTaskTitle(e.target.value)}
           />
-          <button className="rounded-lg border py-2 px-4 hover:border-blue-500">
+          <button className="rounded-lg bg-gray-100 border border-gray-500 py-2 px-4 hover:border-blue-500 transition-all duration-300">
             Add
           </button>
         </form>
@@ -54,15 +54,37 @@ export default function App() {
             setTask(await taskRepo.save({ ...task, completed }))
           }
 
+          function setTitle(title: string) {
+            setTask({ ...task, title })
+          }
+
+          async function saveTask() {
+            try {
+              setTask(await taskRepo.save(task))
+            } catch (error) {
+              alert((error as { message: string }).message)
+            }
+          }
+
           return (
             <div className="flex items-center" key={task.id}>
               <input
-                className="mr-5 h-5 w-5 my-2"
+                className="mr-5 hover:cursor-pointer w-6 h-6 accent-blue-500"
                 type="checkbox"
                 checked={task.completed}
                 onChange={(e) => setCompleted(e.target.checked)}
               />
-              <span>{task.title}</span>
+              <input
+                className="rounded-lg py-2 px-4 my-2 mr-5 border border-gray-500 hover:border-blue-500 transition-all duration-300"
+                value={task.title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+              <button
+                className="rounded-lg bg-gray-100 border border-gray-500 py-2 px-4 hover:border-blue-500 transition-all duration-300"
+                onClick={saveTask}
+              >
+                Save
+              </button>
             </div>
           )
         })}
