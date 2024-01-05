@@ -46,12 +46,21 @@ export default function App() {
           </button>
         </form>
         {tasks.map((task) => {
+          function setTask(value: Task) {
+            setTasks((tasks) => tasks.map((t) => (t === task ? value : t)))
+          }
+
+          async function setCompleted(completed: boolean) {
+            setTask(await taskRepo.save({ ...task, completed }))
+          }
+
           return (
             <div className="flex items-center" key={task.id}>
               <input
                 className="mr-5 h-5 w-5 my-2"
                 type="checkbox"
                 checked={task.completed}
+                onChange={(e) => setCompleted(e.target.checked)}
               />
               <span>{task.title}</span>
             </div>
