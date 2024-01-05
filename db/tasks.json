@@ -8,13 +8,13 @@
   {
     "id": "u9sop1j10jinl09qrb4bww8i",
     "title": "Take a nap",
-    "completed": true,
+    "completed": false,
     "createdAt": "2024-01-04T23:39:10.501Z"
   },
   {
     "id": "q74x4edpr0fbbr3wrbvy0cr7",
     "title": "Pay bills",
-    "completed": true,
+    "completed": false,
     "createdAt": "2024-01-04T23:39:10.502Z"
   }
 ]
