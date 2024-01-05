@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 import { remult } from 'remult'
 import { Task } from './shared/Task'
 
@@ -6,6 +6,7 @@ const taskRepo = remult.repo(Task)
 
 export default function App() {
   const [tasks, setTasks] = useState<Task[]>([])
+  const [newTaskTitle, setNewTaskTitle] = useState('')
 
   useEffect(() => {
     taskRepo
@@ -17,15 +18,42 @@ export default function App() {
       .then(setTasks)
   }, [])
 
+  async function addTask(e: FormEvent) {
+    e.preventDefault()
+    try {
+      const newTask = await taskRepo.insert({ title: newTaskTitle })
+      setTasks([...tasks, newTask])
+      setNewTaskTitle('')
+    } catch (error) {
+      alert((error as { message: string }).message)
+    }
+  }
+
   return (
     <div>
-      <h1>Todos</h1>
+      <h1 className="text-4xl my-5">Todos</h1>
       <main>
+        <form className="mb-5" onSubmit={addTask}>
+          <input
+            className="rounded-lg border py-2 px-4 mr-5 hover:border-blue-500"
+            type="text"
+            value={newTaskTitle}
+            placeholder="What needs to be done?"
+            onChange={(e) => setNewTaskTitle(e.target.value)}
+          />
+          <button className="rounded-lg border py-2 px-4 hover:border-blue-500">
+            Add
+          </button>
+        </form>
         {tasks.map((task) => {
           return (
-            <div key={task.id}>
-              <input type="checkbox" checked={task.completed} />
-              {task.title}
+            <div className="flex items-center" key={task.id}>
+              <input
+                className="mr-5 h-5 w-5 my-2"
+                type="checkbox"
+                checked={task.completed}
+              />
+              <span>{task.title}</span>
             </div>
           )
         })}
