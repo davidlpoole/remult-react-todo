@@ -31,11 +31,11 @@ export default function App() {
 
   return (
     <div>
-      <h1 className="text-4xl my-5 text-center">Todos</h1>
+      <h1 className="text-5xl font-semibold my-5 text-center">Todos</h1>
       <main>
         <form className="flex justify-between mb-5" onSubmit={addTask}>
           <input
-            className="rounded-lg w-full border border-gray-500 py-2 px-4 mr-5 hover:border-blue-500 transition-all duration-300"
+            className="rounded-lg w-full py-2 px-4 mr-5 border border-gray-500 hover:border-blue-500 transition-all duration-300"
             type="text"
             value={newTaskTitle}
             placeholder="What needs to be done?"
@@ -84,7 +84,7 @@ export default function App() {
                 onChange={(e) => setCompleted(e.target.checked)}
               />
               <input
-                className="rounded-lg py-2 px-4 my-2 mr-5 border border-gray-500 hover:border-blue-500 transition-all duration-300"
+                className="rounded-lg py-2 px-4 my-2 mr-5 w-56 border border-gray-500 hover:border-blue-500 transition-all duration-300"
                 value={task.title}
                 onChange={(e) => setTitle(e.target.value)}
               />
