@@ -8,7 +8,13 @@ export default function App() {
   const [tasks, setTasks] = useState<Task[]>([])
 
   useEffect(() => {
-    taskRepo.find().then(setTasks)
+    taskRepo
+      .find({
+        limit: 20,
+        orderBy: { createdAt: 'asc' },
+        // where: { completed: true },
+      })
+      .then(setTasks)
   }, [])
 
   return (
