@@ -45,6 +45,7 @@ export default function TaskItem({ task }: { task: Task }) {
         Save
       </button>
       <button
+        type="button"
         className="rounded-lg bg-gray-100 border border-gray-500 py-2 px-4 hover:border-red-500 transition-all duration-300"
         onClick={() => deleteTask(task.id)}
       >
