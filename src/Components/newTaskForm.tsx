@@ -1,16 +1,14 @@
-import { remult } from 'remult'
-import { Task } from '../shared/Task'
 import { useState, FormEvent } from 'react'
-
-const taskRepo = remult.repo(Task)
+import useTasks from '../hooks/useTasks'
 
 export default function NewTaskForm() {
+  const { addTask } = useTasks()
   const [newTaskTitle, setNewTaskTitle] = useState('')
 
-  async function addTask(e: FormEvent) {
+  async function handleAddTask(e: FormEvent) {
     e.preventDefault()
     try {
-      await taskRepo.insert({ title: newTaskTitle })
+      await addTask(newTaskTitle)
       setNewTaskTitle('')
     } catch (error) {
       alert((error as { message: string }).message)
@@ -18,7 +16,7 @@ export default function NewTaskForm() {
   }
 
   return (
-    <form className="flex justify-between mb-5" onSubmit={addTask}>
+    <form className="flex justify-between mb-5" onSubmit={handleAddTask}>
       <input
         className="rounded-lg w-full py-2 px-4 mr-5 border border-gray-500 hover:border-blue-500 transition-all duration-300"
         type="text"

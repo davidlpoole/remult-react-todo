@@ -2,13 +2,13 @@
   {
     "id": "t661luybf5ec16b8zzuoalnm",
     "title": "Clean car",
-    "completed": false,
+    "completed": true,
     "createdAt": "2024-01-04T23:38:35.618Z"
   },
   {
     "id": "u9sop1j10jinl09qrb4bww8i",
     "title": "Take a nap",
-    "completed": false,
+    "completed": true,
     "createdAt": "2024-01-04T23:39:10.501Z"
   },
   {

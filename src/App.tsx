@@ -1,27 +1,13 @@
-import { useEffect, useState } from 'react'
-import { remult } from 'remult'
-import { Task } from './shared/Task'
-import TaskItem from './Components/TaskItem'
-import NewTaskForm from './Components/NewTaskForm'
-
-const taskRepo = remult.repo(Task)
+import TaskItem from './components/TaskItem'
+import NewTaskForm from './components/NewTaskForm'
+import useTasks from './hooks/useTasks'
 
 export default function App() {
-  const [tasks, setTasks] = useState<Task[]>([])
-
-  useEffect(() => {
-    return taskRepo
-      .liveQuery({
-        limit: 20,
-        orderBy: { createdAt: 'asc' },
-        // where: { completed: true },
-      })
-      .subscribe((info) => setTasks(info.applyChanges))
-  }, [])
+  const { tasks, saveTask } = useTasks()
 
   async function setAllCompleted(completed: boolean) {
-    for (const task of await taskRepo.find()) {
-      await taskRepo.save({ ...task, completed })
+    for (const task of tasks) {
+      await saveTask({ ...task, completed })
     }
   }
 
