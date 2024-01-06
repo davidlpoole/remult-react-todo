@@ -1,6 +1,7 @@
+import { useState } from 'react'
+
 import useTasks from '../hooks/useTasks'
 import { Task } from '../shared/Task'
-import { useState } from 'react'
 
 export default function TaskItem({ task }: { task: Task }) {
   const { deleteTask, saveTask } = useTasks()
