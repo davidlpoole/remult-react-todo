@@ -2,6 +2,7 @@ import useTasks from './hooks/useTasks'
 import NewTaskForm from './components/NewTaskForm'
 import TaskItem from './components/TaskItem'
 import SetAllCompleted from './components/SetAllCompleted'
+import DeleteAll from './components/DeleteAll'
 
 export default function App() {
   const { tasks } = useTasks()
@@ -15,6 +16,7 @@ export default function App() {
           <TaskItem key={task.id} task={task} />
         ))}
         <SetAllCompleted />
+        <DeleteAll />
       </main>
     </div>
   )

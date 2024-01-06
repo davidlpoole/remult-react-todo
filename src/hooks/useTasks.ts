@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { remult } from 'remult'
+import { EntityFilter, remult } from 'remult'
 
 import { Task } from '../shared/Task'
 import TasksController from '../shared/TasksController'
@@ -12,6 +12,7 @@ export default function useTasks() {
     return taskRepo
       .liveQuery({
         limit: 20,
+        page: 1,
         orderBy: { createdAt: 'asc' },
         // where: { completed: true },
       })
@@ -29,7 +30,7 @@ export default function useTasks() {
       }
     },
 
-    saveTask: async (task: Task) => {
+    saveTask: async (task: Task): Promise<void> => {
       try {
         await taskRepo.save(task)
       } catch (error) {
@@ -37,7 +38,7 @@ export default function useTasks() {
       }
     },
 
-    deleteTask: async (id: Task['id']) => {
+    deleteTask: async (id: Task['id']): Promise<void> => {
       try {
         await taskRepo.delete(id)
       } catch (error) {
@@ -45,8 +46,12 @@ export default function useTasks() {
       }
     },
 
-    setAllCompleted: async (completed: boolean) => {
+    setAllCompleted: async (completed: Task['completed']): Promise<void> => {
       await TasksController.setAllCompleted(completed)
+    },
+
+    deleteAllWhere: async (where: EntityFilter<Task>): Promise<void> => {
+      await TasksController.deleteAllWhere(where)
     },
   }
 }
