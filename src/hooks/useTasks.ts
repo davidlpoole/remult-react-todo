@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { remult } from 'remult'
 import { Task } from '../shared/Task'
+import TasksController from '../shared/TasksController'
 
 export default function useTasks() {
   const [tasks, setTasks] = useState<Task[]>([])
@@ -41,6 +42,10 @@ export default function useTasks() {
       } catch (error) {
         alert((error as { message: string }).message)
       }
+    },
+
+    setAllCompleted: async (completed: boolean) => {
+      await TasksController.setAllCompleted(completed)
     },
   }
 }

@@ -3,13 +3,7 @@ import NewTaskForm from './components/NewTaskForm'
 import useTasks from './hooks/useTasks'
 
 export default function App() {
-  const { tasks, saveTask } = useTasks()
-
-  async function setAllCompleted(completed: boolean) {
-    for (const task of tasks) {
-      await saveTask({ ...task, completed })
-    }
-  }
+  const { tasks, setAllCompleted } = useTasks()
 
   return (
     <div>
